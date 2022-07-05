@@ -48,15 +48,15 @@ $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
         </div>
         <div class="col-12 col-md-6 d-flex">
             <div class="col-6 detalle-cancha__datos p-2 ">
-                <div><b>Dirección :</b><?php echo $libro['nombre']; ?></div>
-                <div><b>Teléfono:</b> <?php echo $libro['telefono']; ?></div>
+                <div><b>Dirección : </b><?php echo $libro['direccion']; ?></div>
+                <div><b>Teléfono: </b> <?php echo $libro['telefono']; ?></div>
                 <div><b>Horario de atención :</b>
                     <p><?php echo $libro['horario']; ?></p>
                 </div>
-                <div><b>Tarifa :</b>
+                <div><b>Tarifa : </b>
                     <p><?php echo $libro['tarifa_dia']; ?></p>
                 </div>
-                <div><b>Medios de pago :</b>
+                <div><b>Medios de pago : </b>
                     <p><?php echo $libro['tarifa_noche']; ?></p>
                 </div>
                 <div>

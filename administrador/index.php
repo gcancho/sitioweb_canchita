@@ -1,14 +1,29 @@
 <?php
+// Ocultar errores
+error_reporting(0);
 
-session_start();
 
 if ($_POST) {
-    if (($_POST['usuario'] == "gio") && ($_POST['contrasenia'] == "123")) {
+    session_start();
+    include("config/bd.php");
+    $u = $_POST["usuario"];
+    $c = $_POST["contrasenia"];
+
+    // $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $sentenciaSQL = $conexion->prepare("SELECT * FROM persona WHERE nombre=:u AND contrasenia=:c");
+    $sentenciaSQL->bindParam(":u", $u);
+    $sentenciaSQL->bindParam(":c", $c);
+    $sentenciaSQL->execute();
+    $usuario = $sentenciaSQL->fetch(PDO::FETCH_ASSOC);
+
+    if (($_POST['usuario'] == $usuario["nombre"]) && ($_POST['contrasenia'] == $usuario["contrasenia"])) {
         $_SESSION['usuario'] = "ok";
-        $_SESSION['nombreUsuario'] = "Gio";
+        $_SESSION['nombreUsuario'] = $usuario["nombre"];
         header("Location:inicio.php");
     } else {
         $mensaje = "Error: El usuario y/o contraseña son incorrectos";
+        // echo "a";
+        // header("Location:index.php");
     }
 }
 

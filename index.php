@@ -50,6 +50,7 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                             <i class="fa-regular fa-heart"></i>
                         </div>
                         <div>
+                            <p><?php echo $libro["nombre"]; ?></p>
                             <form action="detalleLibro.php" method="post">
                                 <input type="hidden" value="<?php echo $libro['id']; ?>" name="idLibrito">
                                 <input class="btn btn-primary" type="submit" value="Ver más">
