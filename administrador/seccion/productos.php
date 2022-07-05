@@ -8,6 +8,7 @@
 $txtID = (isset($_POST['txtID'])) ? $_POST['txtID'] : "";
 $txtNombre = (isset($_POST['txtNombre'])) ? $_POST['txtNombre'] : "";
 $txtImagen = (isset($_FILES['txtImagen']['name'])) ? $_FILES['txtImagen']['name'] : "";
+$txtDistrito = (isset($_POST['txtDistrito'])) ? $_POST['txtDistrito'] : "";
 $accion = (isset($_POST['accion'])) ? $_POST['accion'] : "";
 
 include("../config/bd.php");
@@ -15,7 +16,7 @@ include("../config/bd.php");
 // Los parametros que tienen dos puntos (:) son los nombres de los campos de la bd
 switch ($accion) {
     case "Agregar":
-        $sentenciaSQL = $conexion->prepare("INSERT INTO libros (nombre, imagen) VALUES (:nombre, :imagen);");
+        $sentenciaSQL = $conexion->prepare("INSERT INTO libros (nombre, imagen, distrito) VALUES (:nombre, :imagen, :distrito);");
         $sentenciaSQL->bindParam(':nombre', $txtNombre);
 
         $fecha = new DateTime();
@@ -29,14 +30,16 @@ switch ($accion) {
 
 
         $sentenciaSQL->bindParam(':imagen', $nombreArchivo);
+        $sentenciaSQL->bindParam(':distrito', $txtDistrito);
         $sentenciaSQL->execute();
 
         header("Location:productos.php");
 
         break;
     case "Modificar":
-        $sentenciaSQL = $conexion->prepare("UPDATE libros SET nombre=:nombre WHERE id=:id");
+        $sentenciaSQL = $conexion->prepare("UPDATE libros SET nombre=:nombre,distrito=:distrito WHERE id=:id");
         $sentenciaSQL->bindParam(':nombre', $txtNombre);
+        $sentenciaSQL->bindParam(':distrito', $txtDistrito);
         $sentenciaSQL->bindParam(':id', $txtID);
         $sentenciaSQL->execute();
 
@@ -59,8 +62,9 @@ switch ($accion) {
                 }
             }
 
-            $sentenciaSQL = $conexion->prepare("UPDATE libros SET imagen=:imagen WHERE id=:id");
+            $sentenciaSQL = $conexion->prepare("UPDATE libros SET imagen=:imagen,distrito=:distrito WHERE id=:id");
             $sentenciaSQL->bindParam(':imagen', $nombreArchivo);
+            $sentenciaSQL->bindParam(':distrito', $txtDistrito);
             $sentenciaSQL->bindParam(':id', $txtID);
             $sentenciaSQL->execute();
         }
@@ -80,6 +84,7 @@ switch ($accion) {
 
         $txtNombre = $libro['nombre'];
         $txtImagen = $libro['imagen'];
+        $txtDistrito = $libro['distrito'];
         break;
 
     case "Borrar":
@@ -140,6 +145,11 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                     <input type="file" class="form-control" name="txtImagen" id="txtImagen" placeholder="Nombre del libro">
                 </div>
 
+                <div class="form-group">
+                    <label for="txtDistrito">Distrito:</label>
+                    <input type="text" required class="form-control" value="<?php echo $txtDistrito; ?>" name="txtDistrito" id="txtDistrito" placeholder="Nombre del distrito">
+                </div>
+
                 <!-- Activar desactivar botones -->
                 <div class="btn-group" role="group" aria-label="">
                     <button type="submit" name="accion" <?php echo ($accion == "Seleccionar") ? "disabled" : ""; ?> value="Agregar" class="btn btn-success">Agregar</button>
@@ -160,8 +170,9 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre del libro</th>
+                <th>Nombre de canchita</th>
                 <th>Imagen</th>
+                <th>Distrito</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -172,6 +183,7 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo $libro['id']; ?></td>
                     <td><?php echo $libro['nombre']; ?></td>
                     <td><img class="img-thumbnail rounded" src="../../img/<?php echo $libro['imagen']; ?>" width="50" alt=""></td>
+                    <td><?php echo $libro['distrito']; ?></td>
                     <td>
 
                         <form method="post">
