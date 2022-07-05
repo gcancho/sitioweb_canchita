@@ -94,28 +94,28 @@ switch ($accion) {
         $sentenciaSQL->execute();
 
         // Bug: Si agrega bien, pero no funciona el modificar fotos ya que se queda tal como esta
-        if ($txtImagen != "" && $txtImagen2 != "" && $txtImagen3 != "" && $txtImagenQR != "") {
+        if ($txtImagen != "") {
             $fecha = new DateTime();
             $nombreArchivo = ($txtImagen != "") ? $fecha->getTimestamp() . "_" . $_FILES["txtImagen"]["name"] : "imagen.jpg";
             $tmpImagen = $_FILES["txtImagen"]["tmp_name"];
             move_uploaded_file($tmpImagen, "../../img/" . $nombreArchivo);
 
-            $fecha2 = new DateTime();
-            $nombreArchivo2 = ($txtImagen2 != "") ? $fecha2->getTimestamp() . "_" . $_FILES["txtImagen2"]["name"] : "imagen2.jpg";
-            $tmpImagen2 = $_FILES["txtImagen2"]["tmp_name"];
-            move_uploaded_file($tmpImagen2, "../../img2/" . $nombreArchivo2);
+            // $fecha2 = new DateTime();
+            // $nombreArchivo2 = ($txtImagen2 != "") ? $fecha2->getTimestamp() . "_" . $_FILES["txtImagen2"]["name"] : "imagen2.jpg";
+            // $tmpImagen2 = $_FILES["txtImagen2"]["tmp_name"];
+            // move_uploaded_file($tmpImagen2, "../../img2/" . $nombreArchivo2);
 
-            $fecha3 = new DateTime();
-            $nombreArchivo3 = ($txtImagen3 != "") ? $fecha3->getTimestamp() . "_" . $_FILES["txtImagen3"]["name"] : "imagen3.jpg";
-            $tmpImagen3 = $_FILES["txtImagen3"]["tmp_name"];
-            move_uploaded_file($tmpImagen3, "../../img3/" . $nombreArchivo3);
+            // $fecha3 = new DateTime();
+            // $nombreArchivo3 = ($txtImagen3 != "") ? $fecha3->getTimestamp() . "_" . $_FILES["txtImagen3"]["name"] : "imagen3.jpg";
+            // $tmpImagen3 = $_FILES["txtImagen3"]["tmp_name"];
+            // move_uploaded_file($tmpImagen3, "../../img3/" . $nombreArchivo3);
 
-            $fecha4 = new DateTime();
-            $nombreArchivo4 = ($txtImagenQR != "") ? $fecha4->getTimestamp() . "_" . $_FILES["txtImagenQR"]["name"] : "imagenQR.jpg";
-            $tmpImagenQR = $_FILES["txtImagenQR"]["tmp_name"];
-            move_uploaded_file($tmpImagenQR, "../../imgQR/" . $nombreArchivo4);
+            // $fecha4 = new DateTime();
+            // $nombreArchivo4 = ($txtImagenQR != "") ? $fecha4->getTimestamp() . "_" . $_FILES["txtImagenQR"]["name"] : "imagenQR.jpg";
+            // $tmpImagenQR = $_FILES["txtImagenQR"]["tmp_name"];
+            // move_uploaded_file($tmpImagenQR, "../../imgQR/" . $nombreArchivo4);
 
-            $sentenciaSQL = $conexion->prepare("SELECT imagen,imagen2,imagen3,imagen_qr FROM libros WHERE id=:id");
+            $sentenciaSQL = $conexion->prepare("SELECT imagen FROM libros WHERE id=:id");
             $sentenciaSQL->bindParam(':id', $txtID);
             $sentenciaSQL->execute();
             $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
@@ -126,23 +126,23 @@ switch ($accion) {
                     unlink("../../img/" . $libro["imagen"]);
                 }
             }
-            if (isset($libro["imagen2"]) && ($libro["imagen2"] != "imagen2.jpg")) {
-                if (file_exists("../../img2/" . $libro["imagen2"])) {
-                    unlink("../../img2/" . $libro["imagen2"]);
-                }
-            }
-            if (isset($libro["imagen3"]) && ($libro["imagen3"] != "imagen3.jpg")) {
-                if (file_exists("../../img3/" . $libro["imagen3"])) {
-                    unlink("../../img3/" . $libro["imagen3"]);
-                }
-            }
-            if (isset($libro["imagen_qr"]) && ($libro["imagen_qr"] != "imagenQR.jpg")) {
-                if (file_exists("../../imgQR/" . $libro["imagen_qr"])) {
-                    unlink("../../imgQR/" . $libro["imagen_qr"]);
-                }
-            }
+            // if (isset($libro["imagen2"]) && ($libro["imagen2"] != "imagen2.jpg")) {
+            //     if (file_exists("../../img2/" . $libro["imagen2"])) {
+            //         unlink("../../img2/" . $libro["imagen2"]);
+            //     }
+            // }
+            // if (isset($libro["imagen3"]) && ($libro["imagen3"] != "imagen3.jpg")) {
+            //     if (file_exists("../../img3/" . $libro["imagen3"])) {
+            //         unlink("../../img3/" . $libro["imagen3"]);
+            //     }
+            // }
+            // if (isset($libro["imagen_qr"]) && ($libro["imagen_qr"] != "imagenQR.jpg")) {
+            //     if (file_exists("../../imgQR/" . $libro["imagen_qr"])) {
+            //         unlink("../../imgQR/" . $libro["imagen_qr"]);
+            //     }
+            // }
 
-            $sentenciaSQL = $conexion->prepare("UPDATE libros SET imagen=:imagen,distrito=:distrito,direccion=:direccion,telefono=:telefono,horario=:horario,tarifa_dia=:tarifa_dia,tarifa_noche=:tarifa_noche,medio_pago=:medio_pago,imagen2=:imagen2,imagen3=:imagen3,imagen_qr=:imagen_qr WHERE id=:id");
+            $sentenciaSQL = $conexion->prepare("UPDATE libros SET imagen=:imagen,distrito=:distrito,direccion=:direccion,telefono=:telefono,horario=:horario,tarifa_dia=:tarifa_dia,tarifa_noche=:tarifa_noche,medio_pago=:medio_pago WHERE id=:id");
             $sentenciaSQL->bindParam(':imagen', $nombreArchivo);
             $sentenciaSQL->bindParam(':distrito', $txtDistrito);
             $sentenciaSQL->bindParam(':direccion', $txtDireccion);
@@ -153,13 +153,116 @@ switch ($accion) {
             $sentenciaSQL->bindParam(':tarifa_noche', $txtTarifaNoche);
             $sentenciaSQL->bindParam(':medio_pago', $txtMedioPago);
 
-            $sentenciaSQL->bindParam(':imagen2', $nombreArchivo2);
-            $sentenciaSQL->bindParam(':imagen3', $nombreArchivo3);
-            $sentenciaSQL->bindParam(':imagen_qr', $nombreArchivo4);
+            // $sentenciaSQL->bindParam(':imagen2', $nombreArchivo2);
+            // $sentenciaSQL->bindParam(':imagen3', $nombreArchivo3);
+            // $sentenciaSQL->bindParam(':imagen_qr', $nombreArchivo4);
 
             $sentenciaSQL->bindParam(':id', $txtID);
             $sentenciaSQL->execute();
         }
+
+        if ($txtImagen2 != "") {
+
+            $fecha2 = new DateTime();
+            $nombreArchivo2 = ($txtImagen2 != "") ? $fecha2->getTimestamp() . "_" . $_FILES["txtImagen2"]["name"] : "imagen2.jpg";
+            $tmpImagen2 = $_FILES["txtImagen2"]["tmp_name"];
+            move_uploaded_file($tmpImagen2, "../../img2/" . $nombreArchivo2);
+
+            $sentenciaSQL = $conexion->prepare("SELECT imagen2 FROM libros WHERE id=:id");
+            $sentenciaSQL->bindParam(':id', $txtID);
+            $sentenciaSQL->execute();
+            $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
+
+            if (isset($libro["imagen2"]) && ($libro["imagen2"] != "imagen2.jpg")) {
+                if (file_exists("../../img2/" . $libro["imagen2"])) {
+                    unlink("../../img2/" . $libro["imagen2"]);
+                }
+            }
+
+            $sentenciaSQL = $conexion->prepare("UPDATE libros SET imagen2=:imagen2,distrito=:distrito,direccion=:direccion,telefono=:telefono,horario=:horario,tarifa_dia=:tarifa_dia,tarifa_noche=:tarifa_noche,medio_pago=:medio_pago,imagen2=:imagen2 WHERE id=:id");
+            $sentenciaSQL->bindParam(':imagen2', $nombreArchivo2);
+            $sentenciaSQL->bindParam(':distrito', $txtDistrito);
+            $sentenciaSQL->bindParam(':direccion', $txtDireccion);
+
+            $sentenciaSQL->bindParam(':telefono', $txtTelefono); //telefono, horario, tarifa_dia, tarifa_noche, medio_pago
+            $sentenciaSQL->bindParam(':horario', $txtHorario);
+            $sentenciaSQL->bindParam(':tarifa_dia', $txtTarifaDia);
+            $sentenciaSQL->bindParam(':tarifa_noche', $txtTarifaNoche);
+            $sentenciaSQL->bindParam(':medio_pago', $txtMedioPago);
+
+            $sentenciaSQL->bindParam(':id', $txtID);
+            $sentenciaSQL->execute();
+        }
+
+        if ($txtImagen3 != "") {
+
+            $fecha3 = new DateTime();
+            $nombreArchivo3 = ($txtImagen3 != "") ? $fecha3->getTimestamp() . "_" . $_FILES["txtImagen3"]["name"] : "imagen3.jpg";
+            $tmpImagen3 = $_FILES["txtImagen3"]["tmp_name"];
+            move_uploaded_file($tmpImagen3, "../../img3/" . $nombreArchivo3);
+
+            $sentenciaSQL = $conexion->prepare("SELECT imagen3 FROM libros WHERE id=:id");
+            $sentenciaSQL->bindParam(':id', $txtID);
+            $sentenciaSQL->execute();
+            $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
+
+            if (isset($libro["imagen3"]) && ($libro["imagen3"] != "imagen3.jpg")) {
+                if (file_exists("../../img3/" . $libro["imagen3"])) {
+                    unlink("../../img3/" . $libro["imagen3"]);
+                }
+            }
+
+            $sentenciaSQL = $conexion->prepare("UPDATE libros SET imagen3=:imagen3,distrito=:distrito,direccion=:direccion,telefono=:telefono,horario=:horario,tarifa_dia=:tarifa_dia,tarifa_noche=:tarifa_noche,medio_pago=:medio_pago WHERE id=:id");
+            $sentenciaSQL->bindParam(':imagen3', $nombreArchivo3);
+            $sentenciaSQL->bindParam(':distrito', $txtDistrito);
+            $sentenciaSQL->bindParam(':direccion', $txtDireccion);
+
+            $sentenciaSQL->bindParam(':telefono', $txtTelefono); //telefono, horario, tarifa_dia, tarifa_noche, medio_pago
+            $sentenciaSQL->bindParam(':horario', $txtHorario);
+            $sentenciaSQL->bindParam(':tarifa_dia', $txtTarifaDia);
+            $sentenciaSQL->bindParam(':tarifa_noche', $txtTarifaNoche);
+            $sentenciaSQL->bindParam(':medio_pago', $txtMedioPago);
+
+            $sentenciaSQL->bindParam(':id', $txtID);
+            $sentenciaSQL->execute();
+        }
+
+        if ($txtImagenQR != "") {
+            $fecha4 = new DateTime();
+            $nombreArchivo4 = ($txtImagenQR != "") ? $fecha4->getTimestamp() . "_" . $_FILES["txtImagenQR"]["name"] : "imagenQR.jpg";
+            $tmpImagenQR = $_FILES["txtImagenQR"]["tmp_name"];
+            move_uploaded_file($tmpImagenQR, "../../imgQR/" . $nombreArchivo4);
+
+            $sentenciaSQL = $conexion->prepare("SELECT imagen_qr FROM libros WHERE id=:id");
+            $sentenciaSQL->bindParam(':id', $txtID);
+            $sentenciaSQL->execute();
+            $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
+
+            if (isset($libro["imagen_qr"]) && ($libro["imagen_qr"] != "imagenQR.jpg")) {
+                if (file_exists("../../imgQR/" . $libro["imagen_qr"])) {
+                    unlink("../../imgQR/" . $libro["imagen_qr"]);
+                }
+            }
+
+            $sentenciaSQL = $conexion->prepare("UPDATE libros SET imagen_qr=:imagen_qr,distrito=:distrito,direccion=:direccion,telefono=:telefono,horario=:horario,tarifa_dia=:tarifa_dia,tarifa_noche=:tarifa_noche,medio_pago=:medio_pago WHERE id=:id");
+            $sentenciaSQL->bindParam(':imagen_qr', $nombreArchivo4);
+            $sentenciaSQL->bindParam(':distrito', $txtDistrito);
+            $sentenciaSQL->bindParam(':direccion', $txtDireccion);
+
+            $sentenciaSQL->bindParam(':telefono', $txtTelefono); //telefono, horario, tarifa_dia, tarifa_noche, medio_pago
+            $sentenciaSQL->bindParam(':horario', $txtHorario);
+            $sentenciaSQL->bindParam(':tarifa_dia', $txtTarifaDia);
+            $sentenciaSQL->bindParam(':tarifa_noche', $txtTarifaNoche);
+            $sentenciaSQL->bindParam(':medio_pago', $txtMedioPago);
+
+            // $sentenciaSQL->bindParam(':imagen2', $nombreArchivo2);
+            // $sentenciaSQL->bindParam(':imagen3', $nombreArchivo3);
+            // $sentenciaSQL->bindParam(':imagen_qr', $nombreArchivo4);
+
+            $sentenciaSQL->bindParam(':id', $txtID);
+            $sentenciaSQL->execute();
+        }
+
         header("Location:productos.php");
 
         break;
