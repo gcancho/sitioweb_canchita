@@ -1,0 +1,234 @@
+/*
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+  */
+
+/*------------- START VISTA INICIO  ----------------*/
+
+.cabecera {
+  position: relative;
+}
+.menu {
+  display: flex;
+  justify-content: space-around;
+}
+
+.menu__item {
+  cursor: pointer;
+  color: #fff;
+  text-decoration: none;
+}
+
+.contenido {
+  position: absolute;
+  left: 50%;
+}
+
+.img-banner {
+  filter: brightness(70%);
+}
+
+.img-lapadula {
+  display: none;
+}
+
+.container-dropdown {
+  /* height: 80px; */
+}
+
+.dropdown > label {
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+.apoyo-desarrollador {
+  height: 300px;
+  background-color: #b1f9f7;
+  margin-top: 15px;
+}
+.apoyo-desarrollador__img {
+  width: 100%;
+}
+
+.canchita-item {
+  margin: 30px 0;
+}
+
+.canchita-item div p {
+  margin: -2px 0;
+}
+
+.canchita__item__boton {
+  margin: 5px 0;
+}
+
+.container-img-canchita {
+  position: relative;
+}
+.canchita-item__distrito {
+  background-color: #071345;
+  color: #fff;
+  position: absolute;
+  left: 12px;
+  top: 0;
+  min-width: 90px;
+  padding: 0 10px;
+}
+
+.contacto-cancha {
+  margin: 40px 0;
+}
+
+.contacto-cancha a {
+  width: 300px;
+}
+
+.footer {
+  /* height: 60px; */
+  margin-top: 20px;
+  border-top: 1px solid #000;
+  background-color: rgb(122, 188, 122);
+}
+
+.footer p:first-child {
+  text-transform: uppercase;
+  color: rgb(136, 63, 63);
+  font-weight: bold;
+}
+
+.footer p:last-child {
+  font-weight: bold;
+}
+
+.footer .redes-sociales i {
+  font-size: 30px;
+  margin: 0 15px;
+  color: #000;
+}
+@media (min-width: 768px) {
+  .fa-heart {
+    font-size: 30px;
+  }
+  .contenido-cabecera {
+    position: absolute;
+    top: calc(50% - 102px);
+  }
+
+  .contenido-cabecera__titulo {
+    font-size: 80px;
+  }
+
+  .menu {
+    background-color: #fff;
+    position: absolute;
+    bottom: -208px;
+    left: 30%;
+    display: flex;
+    border: 1px solid #000;
+  }
+
+  .menu__item {
+    font-size: 30px;
+    border: 1px solid #fff;
+    background: #000;
+    color: #fff;
+    padding: 0 10px;
+    border-right: 1px solid #000;
+  }
+
+  .menu__item:hover {
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+  }
+
+  .img-lapadula {
+    display: block;
+    filter: grayscale(10);
+    width: 120px;
+    position: absolute;
+    left: 45%;
+  }
+}
+
+/*------------- END VISTA INICIO  ----------------*/
+.img-nosotros {
+  width: 240px;
+}
+
+.lista-cancha {
+  max-height: 450px;
+  overflow-y: scroll;
+}
+
+.lista_cancha__boton {
+  border: 1px solid #000 !important;
+}
+
+.lista_cancha__boton:hover,
+.lista_cancha__boton:focus {
+  background-color: #65b55d !important;
+}
+
+.botones__admin {
+  width: 100px;
+}
+@media (min-width: 768px) {
+  .img-nosotros {
+    width: 500px;
+  }
+}
+/*------------- START VISTA ACERCA DE NOSOTROS  ----------------*/
+
+/*------------- START VISTA DETALLE CANCHA  ----------------*/
+.modal-dialog {
+  margin: 0 auto !important;
+}
+
+.modal-content {
+  width: 640px !important;
+}
+.detalle-cancha {
+  margin: 0 auto;
+  width: 95%;
+  min-height: 500px;
+  text-align: center;
+  background-color: #fdfdfd;
+}
+
+.detalle-cancha__img {
+  width: 100%;
+}
+
+.detalle-cancha__datos {
+  text-align: left;
+}
+
+.detalle-cancha__datos p {
+  margin-bottom: 0.5px;
+}
+
+.detalle-cancha .btn-group {
+  display: block;
+}
+
+.detalle-cancha .btn-group .btn {
+  margin-right: 10px;
+}
+
+.detalle-cancha .btn-group .btn i {
+  margin-left: 6px;
+}
+
+@media (min-width: 768px) {
+  .detalle-cancha__datos div {
+    font-size: 18px;
+    margin: 15px 0;
+  }
+}
+
+/*------------- END VISTA DETALLE CANCHA  ----------------*/

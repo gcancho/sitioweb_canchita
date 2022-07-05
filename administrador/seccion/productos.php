@@ -340,112 +340,122 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
-<div class="col-md-3">
+<div class="col-md-12">
 
     <div class="card">
         <div class="card-header">
             Datos de Libro
         </div>
         <div class="card-body">
-            <form method="post" enctype="multipart/form-data">
+            <form class="d-flex" method="post" enctype="multipart/form-data">
 
-                <div class="form-group">
-                    <label for="txtID">ID:</label>
-                    <input type="text" required readonly class="form-control" value="<?php echo $txtID; ?>" name="txtID" id="txtID" placeholder="ID">
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="txtID">ID:</label>
+                        <input type="text" required readonly class="form-control" value="<?php echo $txtID; ?>" name="txtID" id="txtID" placeholder="ID">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtNombre">Nombre cancha:</label>
+                        <input type="text" required class="form-control" value="<?php echo $txtNombre; ?>" name="txtNombre" id="txtNombre" placeholder="Nombre de canchita">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtImagen">Imagen:</label>
+
+                        <br>
+                        <?php if ($txtImagen != "") { ?>
+                            <img class="img-thumbnail rounded" src="../../img/<?php echo $txtImagen; ?>" width="50" alt="">
+                        <?php } ?>
+
+                        <input type="file" class="form-control" name="txtImagen" id="txtImagen" placeholder="Nombre del libro">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtDistrito">Distrito:</label>
+                        <input type="text" class="form-control" value="<?php echo $txtDistrito; ?>" name="txtDistrito" id="txtDistrito" placeholder="Nombre del distrito">
+                    </div>
+                </div>
+                <div class="col-3">
+
+
+                    <div class="form-group">
+                        <label for="txtDireccion">Direccion:</label>
+                        <input type="text" class="form-control" value="<?php echo $txtDireccion; ?>" name="txtDireccion" id="txtDireccion" placeholder="Ingrese la dirección">
+                    </div>
+                    <!-- telefono, horario, tarifa_dia, tarifa_noche, medio_pago -->
+
+
+                    <div class="form-group">
+                        <label for="txtDireccion">Telefono:</label>
+                        <input type="text" class="form-control" value="<?php echo $txtTelefono; ?>" name="txtTelefono" id="txtTelefono" placeholder="Ingrese el telefono">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtDireccion">Horario:</label>
+                        <input type="text" class="form-control" value="<?php echo $txtHorario; ?>" name="txtHorario" id="txtHorario" placeholder="Ingrese el horario">
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="txtDireccion">Tarifa Día:</label>
+                        <input type="text" class="form-control" value="<?php echo $txtTarifaDia; ?>" name="txtTarifaDia" id="txtTarifaDia" placeholder="Ingrese tarifa dia">
+                    </div>
+                </div>
+                <div class="col-3">
+
+                    <div class="form-group">
+                        <label for="txtDireccion">Tarifa Noche:</label>
+                        <input type="text" class="form-control" value="<?php echo $txtTarifaNoche; ?>" name="txtTarifaNoche" id="txtTarifaNoche" placeholder="Ingrese tarifa noche">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtDireccion">Medio de pago:</label>
+                        <input type="text" class="form-control" value="<?php echo $txtMedioPago; ?>" name="txtMedioPago" id="txtMedioPago" placeholder="Ingrese medio de pago">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtImagen2">Imagen2:</label>
+
+                        <br>
+                        <?php if ($txtImagen2 != "") { ?>
+                            <img class="img-thumbnail rounded" src="../../img2/<?php echo $txtImagen2; ?>" width="50" alt="">
+                        <?php } ?>
+
+                        <input type="file" class="form-control" name="txtImagen2" id="txtImagen2" placeholder="Nombre del libro 2">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtImagen2">Imagen3:</label>
+
+                        <br>
+                        <?php if ($txtImagen3 != "") { ?>
+                            <img class="img-thumbnail rounded" src="../../img3/<?php echo $txtImagen3; ?>" width="50" alt="">
+                        <?php } ?>
+
+                        <input type="file" class="form-control" name="txtImagen3" id="txtImagen3" placeholder="Nombre del libro 3">
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="form-group">
+                        <label for="txtImagen2">ImagenQR:</label>
+
+                        <br>
+                        <?php if ($txtImagenQR != "") { ?>
+                            <img class="img-thumbnail rounded" src="../../imgQR/<?php echo $txtImagenQR; ?>" width="50" alt="">
+                        <?php } ?>
+
+                        <input type="file" class="form-control" name="txtImagenQR" id="txtImagenQR" placeholder="Nombre del libro QR">
+                    </div>
+
+                    <!-- Activar desactivar botones -->
+
+                    <div class="btn-group" role="group" aria-label="">
+                        <button type="submit" name="accion" <?php echo ($accion == "Seleccionar") ? "disabled" : ""; ?> value="Agregar" class="btn btn-success">Agregar</button>
+                        <button type="submit" name="accion" <?php echo ($accion != "Seleccionar") ? "disabled" : ""; ?> value="Modificar" class="btn btn-warning">Modificar</button>
+                        <button type="submit" name="accion" <?php echo ($accion != "Seleccionar") ? "disabled" : ""; ?> value="Cancelar" class="btn btn-info">Cancelar</button>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="txtNombre">Nombre cancha:</label>
-                    <input type="text" required class="form-control" value="<?php echo $txtNombre; ?>" name="txtNombre" id="txtNombre" placeholder="Nombre de canchita">
-                </div>
-
-                <div class="form-group">
-                    <label for="txtImagen">Imagen:</label>
-
-                    <br>
-                    <?php if ($txtImagen != "") { ?>
-                        <img class="img-thumbnail rounded" src="../../img/<?php echo $txtImagen; ?>" width="50" alt="">
-                    <?php } ?>
-
-                    <input type="file" class="form-control" name="txtImagen" id="txtImagen" placeholder="Nombre del libro">
-                </div>
-
-
-
-                <div class="form-group">
-                    <label for="txtDistrito">Distrito:</label>
-                    <input type="text" class="form-control" value="<?php echo $txtDistrito; ?>" name="txtDistrito" id="txtDistrito" placeholder="Nombre del distrito">
-                </div>
-
-                <div class="form-group">
-                    <label for="txtDireccion">Direccion:</label>
-                    <input type="text" class="form-control" value="<?php echo $txtDireccion; ?>" name="txtDireccion" id="txtDireccion" placeholder="Ingrese la dirección">
-                </div>
-
-                <!-- telefono, horario, tarifa_dia, tarifa_noche, medio_pago -->
-
-                <div class="form-group">
-                    <label for="txtDireccion">Telefono:</label>
-                    <input type="text" class="form-control" value="<?php echo $txtTelefono; ?>" name="txtTelefono" id="txtTelefono" placeholder="Ingrese el telefono">
-                </div>
-
-                <div class="form-group">
-                    <label for="txtDireccion">Horario:</label>
-                    <input type="text" class="form-control" value="<?php echo $txtHorario; ?>" name="txtHorario" id="txtHorario" placeholder="Ingrese el horario">
-                </div>
-
-                <div class="form-group">
-                    <label for="txtDireccion">Tarifa Día:</label>
-                    <input type="text" class="form-control" value="<?php echo $txtTarifaDia; ?>" name="txtTarifaDia" id="txtTarifaDia" placeholder="Ingrese tarifa dia">
-                </div>
-
-                <div class="form-group">
-                    <label for="txtDireccion">Tarifa Noche:</label>
-                    <input type="text" class="form-control" value="<?php echo $txtTarifaNoche; ?>" name="txtTarifaNoche" id="txtTarifaNoche" placeholder="Ingrese tarifa noche">
-                </div>
-
-                <div class="form-group">
-                    <label for="txtDireccion">Medio de pago:</label>
-                    <input type="text" class="form-control" value="<?php echo $txtMedioPago; ?>" name="txtMedioPago" id="txtMedioPago" placeholder="Ingrese medio de pago">
-                </div>
-
-                <div class="form-group">
-                    <label for="txtImagen2">Imagen2:</label>
-
-                    <br>
-                    <?php if ($txtImagen2 != "") { ?>
-                        <img class="img-thumbnail rounded" src="../../img2/<?php echo $txtImagen2; ?>" width="50" alt="">
-                    <?php } ?>
-
-                    <input type="file" class="form-control" name="txtImagen2" id="txtImagen2" placeholder="Nombre del libro 2">
-                </div>
-                <div class="form-group">
-                    <label for="txtImagen2">Imagen3:</label>
-
-                    <br>
-                    <?php if ($txtImagen3 != "") { ?>
-                        <img class="img-thumbnail rounded" src="../../img3/<?php echo $txtImagen3; ?>" width="50" alt="">
-                    <?php } ?>
-
-                    <input type="file" class="form-control" name="txtImagen3" id="txtImagen3" placeholder="Nombre del libro 3">
-                </div>
-                <div class="form-group">
-                    <label for="txtImagen2">ImagenQR:</label>
-
-                    <br>
-                    <?php if ($txtImagenQR != "") { ?>
-                        <img class="img-thumbnail rounded" src="../../imgQR/<?php echo $txtImagenQR; ?>" width="50" alt="">
-                    <?php } ?>
-
-                    <input type="file" class="form-control" name="txtImagenQR" id="txtImagenQR" placeholder="Nombre del libro QR">
-                </div>
-
-                <!-- Activar desactivar botones -->
-                <div class="btn-group" role="group" aria-label="">
-                    <button type="submit" name="accion" <?php echo ($accion == "Seleccionar") ? "disabled" : ""; ?> value="Agregar" class="btn btn-success">Agregar</button>
-                    <button type="submit" name="accion" <?php echo ($accion != "Seleccionar") ? "disabled" : ""; ?> value="Modificar" class="btn btn-warning">Modificar</button>
-                    <button type="submit" name="accion" <?php echo ($accion != "Seleccionar") ? "disabled" : ""; ?> value="Cancelar" class="btn btn-info">Cancelar</button>
-                </div>
 
             </form>
         </div>
