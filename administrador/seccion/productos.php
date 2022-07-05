@@ -9,6 +9,14 @@ $txtID = (isset($_POST['txtID'])) ? $_POST['txtID'] : "";
 $txtNombre = (isset($_POST['txtNombre'])) ? $_POST['txtNombre'] : "";
 $txtImagen = (isset($_FILES['txtImagen']['name'])) ? $_FILES['txtImagen']['name'] : "";
 $txtDistrito = (isset($_POST['txtDistrito'])) ? $_POST['txtDistrito'] : "";
+$txtDireccion = (isset($_POST['txtDireccion'])) ? $_POST['txtDireccion'] : "";
+
+$txtTelefono = (isset($_POST['txtTelefono'])) ? $_POST['txtTelefono'] : ""; //telefono, horario, tarifa_dia, tarifa_noche, medio_pago
+$txtHorario = (isset($_POST['txtHorario'])) ? $_POST['txtHorario'] : "";
+$txtTarifaDia = (isset($_POST['txtTarifaDia'])) ? $_POST['txtTarifaDia'] : "";
+$txtTarifaNoche = (isset($_POST['txtTarifaNoche'])) ? $_POST['txtTarifaNoche'] : "";
+$txtMedioPago = (isset($_POST['txtMedioPago'])) ? $_POST['txtMedioPago'] : "";
+
 $accion = (isset($_POST['accion'])) ? $_POST['accion'] : "";
 
 include("../config/bd.php");
@@ -16,7 +24,8 @@ include("../config/bd.php");
 // Los parametros que tienen dos puntos (:) son los nombres de los campos de la bd
 switch ($accion) {
     case "Agregar":
-        $sentenciaSQL = $conexion->prepare("INSERT INTO libros (nombre, imagen, distrito) VALUES (:nombre, :imagen, :distrito);");
+        //telefono, horario, tarifa_dia, tarifa_noche, medio_pago
+        $sentenciaSQL = $conexion->prepare("INSERT INTO libros (nombre, imagen, distrito, direccion, telefono, horario, tarifa_dia, tarifa_noche, medio_pago) VALUES (:nombre, :imagen, :distrito, :direccion, :telefono, :horario, :tarifa_dia, :tarifa_noche, :medio_pago);");
         $sentenciaSQL->bindParam(':nombre', $txtNombre);
 
         $fecha = new DateTime();
@@ -31,15 +40,31 @@ switch ($accion) {
 
         $sentenciaSQL->bindParam(':imagen', $nombreArchivo);
         $sentenciaSQL->bindParam(':distrito', $txtDistrito);
+        $sentenciaSQL->bindParam(':direccion', $txtDireccion);
+
+        $sentenciaSQL->bindParam(':telefono', $txtTelefono); //telefono, horario, tarifa_dia, tarifa_noche, medio_pago
+        $sentenciaSQL->bindParam(':horario', $txtHorario);
+        $sentenciaSQL->bindParam(':tarifa_dia', $txtTarifaDia);
+        $sentenciaSQL->bindParam(':tarifa_noche', $txtTarifaNoche);
+        $sentenciaSQL->bindParam(':medio_pago', $txtMedioPago);
         $sentenciaSQL->execute();
 
         header("Location:productos.php");
 
         break;
     case "Modificar":
-        $sentenciaSQL = $conexion->prepare("UPDATE libros SET nombre=:nombre,distrito=:distrito WHERE id=:id");
+        //telefono, horario, tarifa_dia, tarifa_noche, medio_pago
+        $sentenciaSQL = $conexion->prepare("UPDATE libros SET nombre=:nombre,distrito=:distrito,direccion=:direccion,telefono=:telefono,horario=:horario,tarifa_dia=:tarifa_dia,tarifa_noche=:tarifa_noche,medio_pago=:medio_pago WHERE id=:id");
         $sentenciaSQL->bindParam(':nombre', $txtNombre);
         $sentenciaSQL->bindParam(':distrito', $txtDistrito);
+        $sentenciaSQL->bindParam(':direccion', $txtDireccion);
+
+        $sentenciaSQL->bindParam(':telefono', $txtTelefono);
+        $sentenciaSQL->bindParam(':horario', $txtHorario);
+        $sentenciaSQL->bindParam(':tarifa_dia', $txtTarifaDia);
+        $sentenciaSQL->bindParam(':tarifa_noche', $txtTarifaNoche);
+        $sentenciaSQL->bindParam(':medio_pago', $txtMedioPago);
+
         $sentenciaSQL->bindParam(':id', $txtID);
         $sentenciaSQL->execute();
 
@@ -62,9 +87,17 @@ switch ($accion) {
                 }
             }
 
-            $sentenciaSQL = $conexion->prepare("UPDATE libros SET imagen=:imagen,distrito=:distrito WHERE id=:id");
+            $sentenciaSQL = $conexion->prepare("UPDATE libros SET imagen=:imagen,distrito=:distrito,direccion=:direccion WHERE id=:id");
             $sentenciaSQL->bindParam(':imagen', $nombreArchivo);
             $sentenciaSQL->bindParam(':distrito', $txtDistrito);
+            $sentenciaSQL->bindParam(':direccion', $txtDireccion);
+
+            $sentenciaSQL->bindParam(':telefono', $txtTelefono); //telefono, horario, tarifa_dia, tarifa_noche, medio_pago
+            $sentenciaSQL->bindParam(':horario', $txtHorario);
+            $sentenciaSQL->bindParam(':tarifa_dia', $txtTarifaDia);
+            $sentenciaSQL->bindParam(':tarifa_noche', $txtTarifaNoche);
+            $sentenciaSQL->bindParam(':medio_pago', $txtMedioPago);
+
             $sentenciaSQL->bindParam(':id', $txtID);
             $sentenciaSQL->execute();
         }
@@ -85,6 +118,13 @@ switch ($accion) {
         $txtNombre = $libro['nombre'];
         $txtImagen = $libro['imagen'];
         $txtDistrito = $libro['distrito'];
+        $txtDireccion = $libro['direccion'];
+
+        $txtTelefono = $libro['telefono']; //telefono, horario, tarifa_dia, tarifa_noche, medio_pago
+        $txtHorario = $libro['horario'];
+        $txtTarifaDia = $libro['tarifa_dia'];
+        $txtTarifaNoche = $libro['tarifa_noche'];
+        $txtMedioPago = $libro['medio_pago'];
         break;
 
     case "Borrar":
@@ -115,7 +155,7 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
-<div class="col-md-5">
+<div class="col-md-3">
 
     <div class="card">
         <div class="card-header">
@@ -130,8 +170,8 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                 </div>
 
                 <div class="form-group">
-                    <label for="txtNombre">Nombre:</label>
-                    <input type="text" required class="form-control" value="<?php echo $txtNombre; ?>" name="txtNombre" id="txtNombre" placeholder="Nombre del libro">
+                    <label for="txtNombre">Nombre cancha:</label>
+                    <input type="text" required class="form-control" value="<?php echo $txtNombre; ?>" name="txtNombre" id="txtNombre" placeholder="Nombre de canchita">
                 </div>
 
                 <div class="form-group">
@@ -147,7 +187,39 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
                 <div class="form-group">
                     <label for="txtDistrito">Distrito:</label>
-                    <input type="text" required class="form-control" value="<?php echo $txtDistrito; ?>" name="txtDistrito" id="txtDistrito" placeholder="Nombre del distrito">
+                    <input type="text" class="form-control" value="<?php echo $txtDistrito; ?>" name="txtDistrito" id="txtDistrito" placeholder="Nombre del distrito">
+                </div>
+
+                <div class="form-group">
+                    <label for="txtDireccion">Direccion:</label>
+                    <input type="text" class="form-control" value="<?php echo $txtDireccion; ?>" name="txtDireccion" id="txtDireccion" placeholder="Ingrese la dirección">
+                </div>
+
+                <!-- telefono, horario, tarifa_dia, tarifa_noche, medio_pago -->
+
+                <div class="form-group">
+                    <label for="txtDireccion">Telefono:</label>
+                    <input type="text" class="form-control" value="<?php echo $txtTelefono; ?>" name="txtTelefono" id="txtTelefono" placeholder="Ingrese el telefono">
+                </div>
+
+                <div class="form-group">
+                    <label for="txtDireccion">Horario:</label>
+                    <input type="text" class="form-control" value="<?php echo $txtHorario; ?>" name="txtHorario" id="txtHorario" placeholder="Ingrese el horario">
+                </div>
+
+                <div class="form-group">
+                    <label for="txtDireccion">Tarifa Día:</label>
+                    <input type="text" class="form-control" value="<?php echo $txtTarifaDia; ?>" name="txtTarifaDia" id="txtTarifaDia" placeholder="Ingrese tarifa dia">
+                </div>
+
+                <div class="form-group">
+                    <label for="txtDireccion">Tarifa Noche:</label>
+                    <input type="text" class="form-control" value="<?php echo $txtTarifaNoche; ?>" name="txtTarifaNoche" id="txtTarifaNoche" placeholder="Ingrese tarifa noche">
+                </div>
+
+                <div class="form-group">
+                    <label for="txtDireccion">Medio de pago:</label>
+                    <input type="text" class="form-control" value="<?php echo $txtMedioPago; ?>" name="txtMedioPago" id="txtMedioPago" placeholder="Ingrese medio de pago">
                 </div>
 
                 <!-- Activar desactivar botones -->
@@ -165,7 +237,7 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
 
 </div>
-<div class="col-md-7">
+<div class="col-md-9">
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -173,6 +245,15 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                 <th>Nombre de canchita</th>
                 <th>Imagen</th>
                 <th>Distrito</th>
+                <th>Dirección</th>
+
+                <!-- telefono, horario, tarifa_dia, tarifa_noche, medio_pago -->
+                <th>Telefono</th>
+                <th>Horario</th>
+                <th>Tarifa dia</th>
+                <th>Tarifa noche</th>
+                <th>Medio pago</th>
+
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -184,6 +265,15 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo $libro['nombre']; ?></td>
                     <td><img class="img-thumbnail rounded" src="../../img/<?php echo $libro['imagen']; ?>" width="50" alt=""></td>
                     <td><?php echo $libro['distrito']; ?></td>
+                    <td><?php echo $libro['direccion']; ?></td>
+
+                    <!-- telefono, horario, tarifa_dia, tarifa_noche, medio_pago -->
+                    <td><?php echo $libro['telefono']; ?></td>
+                    <td><?php echo $libro['horario']; ?></td>
+                    <td><?php echo $libro['tarifa_dia']; ?></td>
+                    <td><?php echo $libro['tarifa_noche']; ?></td>
+                    <td><?php echo $libro['medio_pago']; ?></td>
+
                     <td>
 
                         <form method="post">
