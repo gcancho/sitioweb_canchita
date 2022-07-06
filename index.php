@@ -5,6 +5,11 @@ include("administrador/config/bd.php");
 $sentenciaSQL = $conexion->prepare("SELECT * FROM libros");
 $sentenciaSQL->execute();
 $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
+
+$sentenciaSQL2 = $conexion->prepare("SELECT DISTINCT distrito FROM libros ORDER BY distrito");
+$sentenciaSQL2->execute();
+$listaLibros2 = $sentenciaSQL2->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <div class="container-fluid px-0">
@@ -12,18 +17,14 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
         <div class="col-6 col-sm-6 col-md-3 border">
             <div class="container-dropdown border px-2 py-4 h-250">
                 <div class="dropdown">
-                    <label class="mx-2">Buscar por :</label>
-                    <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Distritos
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#">Lima</a></li>
-                        <li><a class="dropdown-item" href="#">Magdalena</a></li>
-                        <li>
-                            <a class="dropdown-item" href="#">San Juan de Lurigancho</a>
-                        </li>
-                        <li><a class="dropdown-item" href="#">San Borja</a></li>
-                    </ul>
+                    <label class="mx-2">Buscar por distrito:</label>
+                    <select name="lista" id="lista-distritos" onchange="changeFunc();">
+                        <option value="Todos">-- Todos los distritos --</option>
+                        <option value="Breña">Breña</option>
+                        <option value="SJL">SJL</option>
+                        <option value="Miguel">San Miguel</option>
+                    </select>
+                    <?php  ?>
                 </div>
             </div>
             <div class="apoyo-desarrollador text-center">
@@ -37,7 +38,7 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
             <div class="row canchitas py-4 border border-primary">
                 <?php foreach ($listaLibros as $libro) { ?>
                     <!-- Inicio Canchita -->
-                    <div class="row col-md-6 col-lg-4 canchita-item">
+                    <div class="row col-md-6 col-lg-4 canchita-item <?php echo $libro["distrito"] ?>" id="<?php echo $libro["distrito"] ?>">
                         <div class="col-10 container-img-canchita">
                             <div class="canchita-item__distrito"><?php echo $libro["distrito"] ?></div>
                             <img class="img-fluid" src="img/<?php echo $libro['imagen']; ?> ?>" alt="" />
