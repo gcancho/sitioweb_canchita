@@ -11,7 +11,7 @@
     <!-- Fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Fin Fontawesome -->
-    <title>Document</title>
+    <title>Chapa tu cancha</title>
     <link rel="stylesheet" href="./css/bootstrap.min.css">
 </head>
 
@@ -30,6 +30,6 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <br>
         <div class="row">

@@ -5,7 +5,7 @@
         Ofrecemos el mejor servicio al pelotero, mediante la entrega de las
         mejores canchas de futbol ubicadas en Lima
     </p>
-    <p>© Todos los derechos reservados - CHAPA TU CANCHA</p>
+    <p class="derechos-reservados">© Todos los derechos reservados - CHAPA TU CANCHA</p>
     <div class="redes-sociales">
         <a href="https://wa.me/51955427033?text=Quiero%20publicitar%20mi%20cancha" target="_blank"><i class="fa-brands fa-whatsapp"></i></i></a>
         <a href="#"><i class="fa-brands fa-facebook"></i></i></a>

@@ -16,8 +16,8 @@ $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
 
 <section class="detalle-cancha py-2 mt-4 border border-dark">
     <div class="row col-12 mx-auto my-2">
-        <h2><?php echo $libro['nombre']; ?></h2>
-        <div class="col-12 col-md-6">
+        <h2>Canchita : <?php echo $libro['nombre']; ?></h2>
+        <div class="col-12 col-md-6 my-2">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
                 <div class="carousel-indicators">
                     <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -53,17 +53,19 @@ $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
                 <div><b>Horario de atención :</b>
                     <p><?php echo $libro['horario']; ?></p>
                 </div>
-                <div><b>Tarifa : </b>
-                    <p><?php echo $libro['tarifa_dia']; ?></p>
+                <div><b>Precio de alquiler por día : </b>
+                    <p>S/ <?php echo $libro['tarifa_dia']; ?></p>
                 </div>
-                <div><b>Medios de pago : </b>
-                    <p><?php echo $libro['tarifa_noche']; ?></p>
+                <div><b>Precio de alquiler por noche : </b>
+                    <p>S/ <?php echo $libro['tarifa_noche']; ?></p>
                 </div>
                 <div>
                     <!-- <b>Información adicional : </b>
                     <p>Estacionamiento : <i class="fa-solid fa-car mx-2"></i><i class="fa-solid fa-motorcycle mx-2"></i><i class="fa-solid fa-person-biking mx-2"></i></p>
                     <p>Servicios : <i class="fa-solid fa-restroom mx-2"></i><i class="fa-solid fa-shower mx-2"></i></i></p> -->
                     <div class="btn-group">
+                        <button type="button" class="btn btn-primary">Ir a Whatsapp<i class="fa-brands fa-whatsapp"></i></button>
+
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver ubicación <i class="fa-solid fa-location-dot"></i></button>
                         <!-- Modal -->
@@ -81,33 +83,33 @@ $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">Ver tienda<i class="fa-solid fa-shop"></i></button>
+                        <button type="button" class="btn btn-primary  mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal2">Ver tienda<i class="fa-solid fa-shop"></i></button>
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel2">Mapa de ubicación</h5>
+                                        <h5 class="modal-title" id="exampleModalLabel2">Tienda</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <img src="imagenes/carta.jpg" width="600px" alt="">
+                                        <img src="imagenes/tienda-futbol.png" width="600px" alt="">
                                     </div>
                                 </div>
                             </div>
                         </div>
 
 
-
                     </div>
                 </div>
             </div>
             <div class="col-6">
+                <img class="d-block" style="margin:0 auto" width="50px" src="imagenes/logo.png" alt="">
                 <img src="imgQR/<?php echo $libro['imagen_qr']; ?>" width="250" alt="">
             </div>
         </div>
     </div>
-    <div class="row col-12">
+    <div class="row col-12 comentarios">
         <h3>Comentarios</h3>
         <!-- Comentarios -->
         <div id="fb-root"></div>
@@ -120,3 +122,6 @@ $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
 <?php
 
 ?>
+
+
+<!-- width="2048" height="1536"  -->

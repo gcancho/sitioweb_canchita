@@ -36,10 +36,6 @@
   display: none;
 }
 
-.container-dropdown {
-  /* height: 80px; */
-}
-
 .dropdown > label {
   font-size: 20px;
   margin-right: 10px;
@@ -47,11 +43,12 @@
 
 .apoyo-desarrollador {
   height: 300px;
-  background-color: #b1f9f7;
+  /* background-color: #b1f9f7; */
   margin-top: 15px;
 }
 .apoyo-desarrollador__img {
-  width: 100%;
+  /* width: 100%; */
+  width: 330px;
 }
 
 .canchita-item {
@@ -232,3 +229,29 @@
 }
 
 /*------------- END VISTA DETALLE CANCHA  ----------------*/
+
+.comentarios {
+  padding-top: 20px;
+  border-top: 1px solid #000;
+}
+
+.carousel-item {
+  border: 2px solid #000;
+}
+
+.derechos-reservados {
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: #2e6529 !important;
+}
+
+/* .menu_admin {
+  position: relative !important;
+}
+
+.menu_admin .cerrar_sesion {
+  position: absolute !important;
+  right: 0 !important;
+} */

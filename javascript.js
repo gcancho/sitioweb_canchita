@@ -44,4 +44,13 @@ function changeFunc() {
       index.style.display = "flex";
     }
   }
+
+  if ($selectedValue == "Borja") {
+    for (let index of $elementosCanchitaTodos) {
+      index.style.display = "none";
+    }
+    for (let index of $elementosSanBorja) {
+      index.style.display = "flex";
+    }
+  }
 }

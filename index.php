@@ -18,18 +18,20 @@ $listaLibros2 = $sentenciaSQL2->fetchAll(PDO::FETCH_ASSOC);
             <div class="container-dropdown border px-2 py-4 h-250">
                 <div class="dropdown">
                     <label class="mx-2">Buscar por distrito:</label>
-                    <select name="lista" id="lista-distritos" onchange="changeFunc();">
-                        <option value="Todos">-- Todos los distritos --</option>
+                    <select class="form-select my-3" name="lista" id="lista-distritos" onchange="changeFunc();">
+                        <option value="Todos">Todos los distritos</option>
                         <option value="Breña">Breña</option>
                         <option value="SJL">SJL</option>
                         <option value="Miguel">San Miguel</option>
+                        <option value="Borja">San Borja</option>
                     </select>
                     <?php  ?>
                 </div>
             </div>
             <div class="apoyo-desarrollador text-center">
                 <h5>Apoyanos con una donación para el mantenimiento de la página 🙏</h5>
-                <img class="apoyo-desarrollador__img" src="imagenes/yape-qr-1.png" alt="" />
+                <img width="80" src="imagenes/logo.png" alt="" />
+                <img class="apoyo-desarrollador__img" src="imagenes/qr_gio.jpg" alt="" />
 
             </div>
         </div>
@@ -38,7 +40,7 @@ $listaLibros2 = $sentenciaSQL2->fetchAll(PDO::FETCH_ASSOC);
             <div class="row canchitas py-4 border border-primary">
                 <?php foreach ($listaLibros as $libro) { ?>
                     <!-- Inicio Canchita -->
-                    <div class="row col-md-6 col-lg-4 canchita-item <?php echo $libro["distrito"] ?>" id="<?php echo $libro["distrito"] ?>">
+                    <div class="row col-md-6 col-lg-4 canchita-item py-2 <?php echo $libro["distrito"] ?>" id="<?php echo $libro["distrito"] ?>">
                         <div class="col-10 container-img-canchita">
                             <div class="canchita-item__distrito"><?php echo $libro["distrito"] ?></div>
                             <img class="img-fluid" src="img/<?php echo $libro['imagen']; ?> ?>" alt="" />
@@ -51,8 +53,8 @@ $listaLibros2 = $sentenciaSQL2->fetchAll(PDO::FETCH_ASSOC);
                             <i class="fa-regular fa-heart"></i>
                         </div>
                         <div>
-                            <p><?php echo $libro["nombre"]; ?></p>
-                            <form action="detalleLibro.php" method="post">
+                            <p class="my-1" style="font-weight: 500;">Canchita : <?php echo $libro["nombre"]; ?></p>
+                            <form class="my-2" action="detalleLibro.php" method="post">
                                 <input type="hidden" value="<?php echo $libro['id']; ?>" name="idLibrito">
                                 <input class="btn btn-primary" type="submit" value="Ver más">
                             </form>
