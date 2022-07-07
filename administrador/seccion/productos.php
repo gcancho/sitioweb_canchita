@@ -19,6 +19,7 @@ $txtMedioPago = (isset($_POST['txtMedioPago'])) ? $_POST['txtMedioPago'] : "";
 $txtImagen2 = (isset($_FILES['txtImagen2']['name'])) ? $_FILES['txtImagen2']['name'] : "";
 $txtImagen3 = (isset($_FILES['txtImagen3']['name'])) ? $_FILES['txtImagen3']['name'] : "";
 $txtImagenQR = (isset($_FILES['txtImagenQR']['name'])) ? $_FILES['txtImagenQR']['name'] : "";
+$txtImagenTienda = (isset($_FILES['txtImagenTienda']['name'])) ? $_FILES['txtImagenTienda']['name'] : "";
 
 $accion = (isset($_POST['accion'])) ? $_POST['accion'] : "";
 
@@ -28,7 +29,7 @@ include("../config/bd.php");
 switch ($accion) {
     case "Agregar":
         //telefono, horario, tarifa_dia, tarifa_noche, medio_pago
-        $sentenciaSQL = $conexion->prepare("INSERT INTO libros (nombre, imagen, distrito, direccion, telefono, horario, tarifa_dia, tarifa_noche, medio_pago, imagen2, imagen3, imagen_qr) VALUES (:nombre, :imagen, :distrito, :direccion, :telefono, :horario, :tarifa_dia, :tarifa_noche, :medio_pago, :imagen2, :imagen3, :imagen_qr);");
+        $sentenciaSQL = $conexion->prepare("INSERT INTO libros (nombre, imagen, distrito, direccion, telefono, horario, tarifa_dia, tarifa_noche, medio_pago, imagen2, imagen3, imagen_qr,imagen_tienda) VALUES (:nombre, :imagen, :distrito, :direccion, :telefono, :horario, :tarifa_dia, :tarifa_noche, :medio_pago, :imagen2, :imagen3, :imagen_qr, :imagen_tienda );");
         $sentenciaSQL->bindParam(':nombre', $txtNombre);
 
         $fecha = new DateTime();
@@ -39,11 +40,15 @@ switch ($accion) {
         $nombreArchivo3 = ($txtImagen3 != "") ? $fecha3->getTimestamp() . "_" . $_FILES["txtImagen3"]["name"] : "imagen3.jpg";
         $fecha4 = new DateTime();
         $nombreArchivo4 = ($txtImagenQR != "") ? $fecha4->getTimestamp() . "_" . $_FILES["txtImagenQR"]["name"] : "imagenQR.jpg";
+        $fecha5 = new DateTime();
+        $nombreArchivo5 = ($txtImagenTienda != "") ? $fecha5->getTimestamp() . "_" . $_FILES["txtImagenTienda"]["name"] : "imagenTienda.jpg";
+
 
         $tmpImagen = $_FILES["txtImagen"]["tmp_name"];
         $tmpImagen2 = $_FILES["txtImagen2"]["tmp_name"];
         $tmpImagen3 = $_FILES["txtImagen3"]["tmp_name"];
         $tmpImagenQR = $_FILES["txtImagenQR"]["tmp_name"];
+        $tmpImagenTienda = $_FILES["txtImagenTienda"]["tmp_name"];
 
         if ($tmpImagen != "") {
             move_uploaded_file($tmpImagen, "../../img/" . $nombreArchivo);
@@ -56,6 +61,9 @@ switch ($accion) {
         }
         if ($tmpImagenQR != "") {
             move_uploaded_file($tmpImagenQR, "../../imgQR/" . $nombreArchivo4);
+        }
+        if ($tmpImagenTienda != "") {
+            move_uploaded_file($tmpImagenTienda, "../../imgTienda/" . $nombreArchivo5);
         }
 
 
@@ -71,6 +79,7 @@ switch ($accion) {
         $sentenciaSQL->bindParam(':imagen2', $nombreArchivo2);
         $sentenciaSQL->bindParam(':imagen3', $nombreArchivo3);
         $sentenciaSQL->bindParam(':imagen_qr', $nombreArchivo4);
+        $sentenciaSQL->bindParam(':imagen_tienda', $nombreArchivo5);
 
         $sentenciaSQL->execute();
 
@@ -262,6 +271,41 @@ switch ($accion) {
             $sentenciaSQL->bindParam(':id', $txtID);
             $sentenciaSQL->execute();
         }
+        if ($txtImagenTienda != "") {
+            $fecha5 = new DateTime();
+            $nombreArchivo5 = ($txtImagenTienda != "") ? $fecha5->getTimestamp() . "_" . $_FILES["txtImagenTienda"]["name"] : "imagenTienda.jpg";
+            $tmpImagenTienda = $_FILES["txtImagenTienda"]["tmp_name"];
+            move_uploaded_file($tmpImagenTienda, "../../imgTienda/" . $nombreArchivo5);
+
+            $sentenciaSQL = $conexion->prepare("SELECT imagen_tienda FROM libros WHERE id=:id");
+            $sentenciaSQL->bindParam(':id', $txtID);
+            $sentenciaSQL->execute();
+            $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
+
+            if (isset($libro["imagen_tienda"]) && ($libro["imagen_tienda"] != "imagenTienda.jpg")) {
+                if (file_exists("../../imgTienda/" . $libro["imagen_tienda"])) {
+                    unlink("../../imgTienda/" . $libro["imagen_tienda"]);
+                }
+            }
+
+            $sentenciaSQL = $conexion->prepare("UPDATE libros SET imagen_tienda=:imagen_tienda,distrito=:distrito,direccion=:direccion,telefono=:telefono,horario=:horario,tarifa_dia=:tarifa_dia,tarifa_noche=:tarifa_noche,medio_pago=:medio_pago WHERE id=:id");
+            $sentenciaSQL->bindParam(':imagen_tienda', $nombreArchivo5);
+            $sentenciaSQL->bindParam(':distrito', $txtDistrito);
+            $sentenciaSQL->bindParam(':direccion', $txtDireccion);
+
+            $sentenciaSQL->bindParam(':telefono', $txtTelefono); //telefono, horario, tarifa_dia, tarifa_noche, medio_pago
+            $sentenciaSQL->bindParam(':horario', $txtHorario);
+            $sentenciaSQL->bindParam(':tarifa_dia', $txtTarifaDia);
+            $sentenciaSQL->bindParam(':tarifa_noche', $txtTarifaNoche);
+            $sentenciaSQL->bindParam(':medio_pago', $txtMedioPago);
+
+            // $sentenciaSQL->bindParam(':imagen2', $nombreArchivo2);
+            // $sentenciaSQL->bindParam(':imagen3', $nombreArchivo3);
+            // $sentenciaSQL->bindParam(':imagen_qr', $nombreArchivo4);
+
+            $sentenciaSQL->bindParam(':id', $txtID);
+            $sentenciaSQL->execute();
+        }
 
         header("Location:productos.php");
 
@@ -291,6 +335,7 @@ switch ($accion) {
         $txtImagen2 = $libro['imagen2'];
         $txtImagen3 = $libro['imagen3'];
         $txtImagenQR = $libro['imagen_qr'];
+        $txtImagenTienda = $libro['imagen_tienda'];
 
         break;
 
@@ -321,6 +366,11 @@ switch ($accion) {
         if (isset($libro["imagen_qr"]) && ($libro["imagen_qr"] != "imagenQR.jpg")) {
             if (file_exists("../../imgQR/" . $libro["imagen_qr"])) {
                 unlink("../../imgQR/" . $libro["imagen_qr"]);
+            }
+        }
+        if (isset($libro["imagen_tienda"]) && ($libro["imagen_tienda"] != "imagenTienda.jpg")) {
+            if (file_exists("../../imgTienda/" . $libro["imagen_tienda"])) {
+                unlink("../../imgTienda/" . $libro["imagen_tienda"]);
             }
         }
 
@@ -446,6 +496,16 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
                         <input type="file" class="form-control" name="txtImagenQR" id="txtImagenQR" placeholder="Nombre del libro QR">
                     </div>
+                    <div class="form-group">
+                        <label for="txtImagenTienda">Imagen Tienda:</label>
+
+                        <br>
+                        <?php if ($txtImagenTienda != "") { ?>
+                            <img class="img-thumbnail rounded" src="../../imgTienda/<?php echo $txtImagenTienda; ?>" width="50" alt="">
+                        <?php } ?>
+
+                        <input type="file" class="form-control" name="txtImagenTienda" id="txtImagenTienda" placeholder="Nombre del libro Tienda">
+                    </div>
 
                     <!-- Activar desactivar botones -->
 
@@ -465,6 +525,7 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
 
 </div>
+<!-- TABLAAAAAAAAA -->
 <div class="col-md-9">
     <table class="table table-bordered">
         <thead>
@@ -484,6 +545,7 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                 <th>Imagen 2</th>
                 <th>Imagen 3</th>
                 <th>Imagen QR</th>
+                <th>Imagen Tienda</th>
 
 
                 <th>Acciones</th>
@@ -508,6 +570,7 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                     <td><img class="img-thumbnail rounded" src="../../img2/<?php echo $libro['imagen2']; ?>" width="50" alt=""></td>
                     <td><img class="img-thumbnail rounded" src="../../img3/<?php echo $libro['imagen3']; ?>" width="50" alt=""></td>
                     <td><img class="img-thumbnail rounded" src="../../imgQR/<?php echo $libro['imagen_qr']; ?>" width="50" alt=""></td>
+                    <td><img class="img-thumbnail rounded" src="../../imgTienda/<?php echo $libro['imagen_tienda']; ?>" width="50" alt=""></td>
 
 
                     <td>
