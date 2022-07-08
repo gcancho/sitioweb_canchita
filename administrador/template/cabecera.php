@@ -30,13 +30,13 @@ if (!isset($_SESSION['usuario'])) {
     <!-- Otengo la url y le concateno una cadena -->
     <?php $url = "http://" . $_SERVER['HTTP_HOST'] . "/sitioweb" ?>
 
-    <nav class="navbar navbar-expand navbar-light bg-light menu_admin">
+    <nav class="navbar navbar-expand navbar-light menu_admin bg-primary text-white">
         <div class="nav navbar-nav">
-            <a class="nav-item nav-link active" href="#">Administrador del sitio web <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="<?php echo $url; ?>/administrador/inicio.php">Inicio</a>
-            <a class="nav-item nav-link" href="<?php echo $url; ?>/administrador/seccion/productos.php">Canchitas</a>
-            <a class="nav-item nav-link" href="<?php echo $url; ?>" target="_blank">Ver sitio web</a>
-            <a class="nav-item nav-link cerrar_sesion" href="<?php echo $url; ?>/administrador/seccion/cerrar.php">Cerrar sesión</a>
+            <a class="nav-item nav-link text-white active" href="<?php echo $url; ?>/administrador/inicio.php">Administrador del sitio web <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link text-white" href="<?php echo $url; ?>/administrador/inicio.php">Inicio</a>
+            <a class="nav-item nav-link text-white" href="<?php echo $url; ?>/administrador/seccion/productos.php">Canchitas</a>
+            <a class="nav-item nav-link text-white" href="<?php echo $url; ?>" target="_blank">Ver sitio web</a>
+            <a class="nav-item nav-link text-white cerrar_sesion" href="<?php echo $url; ?>/administrador/seccion/cerrar.php">Cerrar sesión</a>
         </div>
     </nav>
 

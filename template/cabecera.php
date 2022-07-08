@@ -30,6 +30,6 @@
         </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container-fluid col-md-11">
         <br>
         <div class="row">

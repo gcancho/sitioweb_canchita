@@ -1,4 +1,5 @@
 let $elementosCanchitaTodos = document.querySelectorAll(".canchita-item");
+let $elementoLima = document.querySelectorAll(".Lima");
 let $elementosBreña = document.querySelectorAll(".Breña");
 let $elementosSJL = document.querySelectorAll(".SJL");
 let $elementosSanMiguel = document.querySelectorAll(".Miguel");
@@ -14,6 +15,15 @@ function changeFunc() {
 
   if ($selectedValue == "Todos") {
     for (let index of $elementosCanchitaTodos) {
+      index.style.display = "flex";
+    }
+  }
+
+  if ($selectedValue == "Lima") {
+    for (let index of $elementosCanchitaTodos) {
+      index.style.display = "none";
+    }
+    for (let index of $elementoLima) {
       index.style.display = "flex";
     }
   }
@@ -50,6 +60,14 @@ function changeFunc() {
       index.style.display = "none";
     }
     for (let index of $elementosSanBorja) {
+      index.style.display = "flex";
+    }
+  }
+  if ($selectedValue == "Olivos") {
+    for (let index of $elementosCanchitaTodos) {
+      index.style.display = "none";
+    }
+    for (let index of $elementosLosOlivos) {
       index.style.display = "flex";
     }
   }

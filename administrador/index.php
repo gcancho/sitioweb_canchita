@@ -44,15 +44,17 @@ if ($_POST) {
 </head>
 
 <body>
-
+    <div class="w-100" ">
+        <img class=" d-block" style="margin: 0 auto;" src="../imagenes/logo-cancha.png" alt="">
+    </div>
     <div class="container">
         <div class="row">
             <div class="col-md-4">
             </div>
             <div class="col-md-4">
-                <br><br><br>
+                <br>
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header bg-primary text-white text-center">
                         Login
                     </div>
                     <div class="card-body">
@@ -64,14 +66,14 @@ if ($_POST) {
                         <?php } ?>
                         <form method="post">
                             <div class="form-group">
-                                <label>Usuario</label>
+                                <label>Administrador</label>
                                 <input type="text" class="form-control" name="usuario" aria-describedby="emailHelp" placeholder="Escribe tu usuario">
                             </div>
                             <div class="form-group">
                                 <label>Contraseña:</label>
                                 <input type="password" class="form-control" name="contrasenia" placeholder="Escribe tu contraseña">
                             </div>
-                            <button type="submit" class="btn btn-primary">Entrar al administrador</button>
+                            <button type="submit" class="btn btn-primary btn-block">Ingresar</button>
                         </form>
                     </div>
                 </div>

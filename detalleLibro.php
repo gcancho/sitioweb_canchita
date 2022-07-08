@@ -15,7 +15,7 @@ $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
 ?>
 
 <section class="detalle-cancha py-2 mt-4 border border-dark">
-    <div class="row col-12 mx-auto my-2">
+    <div class="row col-12 mx-auto my-2 text-center">
         <h2>Canchita : <?php echo $libro['nombre']; ?></h2>
         <div class="col-12 col-md-6 my-2">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -60,11 +60,16 @@ $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
                     <p>S/ <?php echo $libro['tarifa_noche']; ?></p>
                 </div>
                 <div>
+                    <p><b>Estacionamiento</b> : <i class="fa-solid fa-car mx-2"></i><i class="fa-solid fa-motorcycle mx-2"></i><i class="fa-solid fa-person-biking mx-2"></i></p>
+                </div>
+                <div>
+                    <p><b>Servicios</b> : <i class="fa-solid fa-restroom mx-2"></i><i class="fa-solid fa-shower mx-2"></i></i></p>
+                </div>
+                <div>
                     <!-- <b>Información adicional : </b>
                     <p>Estacionamiento : <i class="fa-solid fa-car mx-2"></i><i class="fa-solid fa-motorcycle mx-2"></i><i class="fa-solid fa-person-biking mx-2"></i></p>
                     <p>Servicios : <i class="fa-solid fa-restroom mx-2"></i><i class="fa-solid fa-shower mx-2"></i></i></p> -->
                     <div class="btn-group">
-                        <button type="button" class="btn btn-primary">Ir a Whatsapp<i class="fa-brands fa-whatsapp"></i></button>
 
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ver ubicación <i class="fa-solid fa-location-dot"></i></button>
@@ -83,7 +88,7 @@ $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary  mt-2" data-bs-toggle="modal" data-bs-target="#exampleModal2">Ver tienda<i class="fa-solid fa-shop"></i></button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal2">Ver tienda<i class="fa-solid fa-shop"></i></button>
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
                             <div class="modal-dialog">
@@ -99,13 +104,14 @@ $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
                             </div>
                         </div>
 
+                        <a href="https://wa.me/51955427033?text=Quiero%20publicitar%20mi%20cancha" type="button" class="btn btn-primary mt-2" target="_blank">Ir a Whatsapp<i class="fa-brands fa-whatsapp"></i></a>
 
                     </div>
                 </div>
             </div>
             <div class="col-6">
-                <img class="d-block" style="margin:0 auto" width="50px" src="imagenes/logo.png" alt="">
-                <img src="imgQR/<?php echo $libro['imagen_qr']; ?>" width="250" alt="">
+                <img class="d-block" style="margin:0 auto" width="100px" src="imagenes/logo.png" alt="">
+                <img src="imgQR/<?php echo $libro['imagen_qr']; ?>" width="350" alt="">
             </div>
         </div>
     </div>

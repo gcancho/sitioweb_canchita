@@ -20,20 +20,30 @@ $listaLibros2 = $sentenciaSQL2->fetchAll(PDO::FETCH_ASSOC);
                     <label class="mx-2">Buscar por distrito:</label>
                     <select class="form-select my-3" name="lista" id="lista-distritos" onchange="changeFunc();">
                         <option value="Todos">Todos los distritos</option>
+                        <option value="Lima">Cercado de Lima</option>
                         <option value="Breña">Breña</option>
                         <option value="SJL">SJL</option>
                         <option value="Miguel">San Miguel</option>
                         <option value="Borja">San Borja</option>
+                        <option value="Olivos">Los Olivos</option>
                     </select>
                     <?php  ?>
                 </div>
             </div>
+
+
             <div class="apoyo-desarrollador text-center">
                 <h5>Apoyanos con una donación para el mantenimiento de la página 🙏</h5>
                 <img width="80" src="imagenes/logo.png" alt="" />
                 <img class="apoyo-desarrollador__img" src="imagenes/qr_gio.jpg" alt="" />
-
             </div>
+
+            <div style="margin-top: 220px;">
+                <h3 class="my-2">¿Si soy dueño de una cancha de fútbol como lo incluyo en el repositorio de "Chapa tu cancha"?</h3>
+                <p>Para incluirlo debes comunicarte con nosotros por medio del correo chapatucancha@gmail.com o dandole click al icono de "Valida tu registro aquí".</p>
+                <a href="https://wa.me/51955427033?text=Quiero%20publicitar%20mi%20cancha" target="_blank"><img style="display: block;margin: 0 auto;" src="imagenes/validar-registro.png" alt=""></a>
+            </div>
+
         </div>
         <div class="col-6 col-sm-6 col-md-9 border">
 

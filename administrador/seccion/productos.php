@@ -393,7 +393,7 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 <div class="col-md-12">
 
     <div class="card">
-        <div class="card-header">
+        <div class="card-header bg-success text-white">
             Datos de Libro
         </div>
         <div class="card-body">
@@ -448,14 +448,14 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
 
                     <div class="form-group">
-                        <label for="txtDireccion">Tarifa Día:</label>
+                        <label for="txtDireccion">Tarifa Día en soles:</label>
                         <input type="text" class="form-control" value="<?php echo $txtTarifaDia; ?>" name="txtTarifaDia" id="txtTarifaDia" placeholder="Ingrese tarifa dia">
                     </div>
                 </div>
                 <div class="col-3">
 
                     <div class="form-group">
-                        <label for="txtDireccion">Tarifa Noche:</label>
+                        <label for="txtDireccion">Tarifa Noche en soles:</label>
                         <input type="text" class="form-control" value="<?php echo $txtTarifaNoche; ?>" name="txtTarifaNoche" id="txtTarifaNoche" placeholder="Ingrese tarifa noche">
                     </div>
 
@@ -526,9 +526,9 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
 
 </div>
 <!-- TABLAAAAAAAAA -->
-<div class="col-md-9">
+<div class="col-md-12 mt-2">
     <table class="table table-bordered">
-        <thead>
+        <thead class="bg-success text-white">
             <tr>
                 <th>ID</th>
                 <th>Nombre de canchita</th>
@@ -557,7 +557,7 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                     <!-- Estos datos deben coincidir con los nomrbres de los campos de la bd -->
                     <td><?php echo $libro['id']; ?></td>
                     <td><?php echo $libro['nombre']; ?></td>
-                    <td><img class="img-thumbnail rounded" src="../../img/<?php echo $libro['imagen']; ?>" width="50" alt=""></td>
+                    <td><img class="img-thumbnail rounded" src="../../img/<?php echo $libro['imagen']; ?>" width="150" alt=""></td>
                     <td><?php echo $libro['distrito']; ?></td>
                     <td><?php echo $libro['direccion']; ?></td>
 
@@ -567,10 +567,10 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                     <td><?php echo $libro['tarifa_dia']; ?></td>
                     <td><?php echo $libro['tarifa_noche']; ?></td>
                     <td><?php echo $libro['medio_pago']; ?></td>
-                    <td><img class="img-thumbnail rounded" src="../../img2/<?php echo $libro['imagen2']; ?>" width="50" alt=""></td>
-                    <td><img class="img-thumbnail rounded" src="../../img3/<?php echo $libro['imagen3']; ?>" width="50" alt=""></td>
-                    <td><img class="img-thumbnail rounded" src="../../imgQR/<?php echo $libro['imagen_qr']; ?>" width="50" alt=""></td>
-                    <td><img class="img-thumbnail rounded" src="../../imgTienda/<?php echo $libro['imagen_tienda']; ?>" width="50" alt=""></td>
+                    <td><img class="img-thumbnail rounded" src="../../img2/<?php echo $libro['imagen2']; ?>" width="150" alt=""></td>
+                    <td><img class="img-thumbnail rounded" src="../../img3/<?php echo $libro['imagen3']; ?>" width="150" alt=""></td>
+                    <td><img class="img-thumbnail rounded" src="../../imgQR/<?php echo $libro['imagen_qr']; ?>" width="150" alt=""></td>
+                    <td><img class="img-thumbnail rounded" src="../../imgTienda/<?php echo $libro['imagen_tienda']; ?>" width="150" alt=""></td>
 
 
                     <td>
@@ -578,8 +578,8 @@ $listaLibros = $sentenciaSQL->fetchAll(PDO::FETCH_ASSOC);
                         <form method="post">
 
                             <input type="hidden" name="txtID" id="txtUD" value="<?php echo $libro['id']; ?>">
-                            <input type="submit" name="accion" value="Seleccionar" class="btn btn-primary">
-                            <input type="submit" name="accion" value="Borrar" class="btn btn-danger">
+                            <input type="submit" name="accion" value="Seleccionar" class="btn btn-primary my-1">
+                            <input type="submit" name="accion" value="Borrar" class="btn btn-danger my-1">
 
                         </form>
 
