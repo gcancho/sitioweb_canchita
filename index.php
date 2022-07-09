@@ -79,6 +79,9 @@ $listaLibros2 = $sentenciaSQL2->fetchAll(PDO::FETCH_ASSOC);
     <div class="contacto-cancha text-center">
         <h3>¿Quieres publicitar tu cancha?</h3>
         <a class="btn btn-primary btn-lg px-4 my-4" href="https://wa.me/51955427033?text=Quiero%20publicitar%20mi%20cancha" target="_blank"> Contactar</a>
+        <div>
+            <a target="_blank" href="brochure-canchita.pdf" class="btn btn-primary">Descargar Brochure</a>
+        </div>
     </div>
 
 </div>
