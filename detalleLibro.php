@@ -104,7 +104,7 @@ $libro = $sentenciaSQL->fetch(PDO::FETCH_LAZY);
                             </div>
                         </div>
 
-                        <a href="https://wa.me/51955427033?text=Quiero%20publicitar%20mi%20cancha" type="button" class="btn btn-primary mt-2" target="_blank">Ir a Whatsapp<i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="https://wa.me/51955427033?text=Quiero%20alquilar%20cancha" type="button" class="btn btn-primary mt-2" target="_blank">Ir a Whatsapp<i class="fa-brands fa-whatsapp"></i></a>
 
                     </div>
                 </div>
